@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option  csharp_namespace = "AppGrpcService";
+
+package user;
+
+service Users{
+	rpc Login(GrpcLoginRequest) returns (GrpcLoginResponse);
+}
+
+message GrpcLoginRequest{
+	string username = 10;
+	string password = 20;
+}
+
+message GrpcLoginResponse{
+	string token = 10;
+	string refreshToken = 20;
+}
