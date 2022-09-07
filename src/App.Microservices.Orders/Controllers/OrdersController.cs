@@ -12,18 +12,18 @@ namespace App.Microservices.Orders.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private OrderDbContext _db;
+        private readonly OrderDbContext _dbContext;
 
-        public OrdersController(OrderDbContext db)
+        public OrdersController(OrderDbContext dbContext)
         {
-            _db = db;
+            _dbContext = dbContext;
         }
 
         // GET: api/<OrdersController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var orders =  await _db.Orders.ToListAsync();
+            var orders =  await _dbContext.Orders.ToListAsync();
 
             return Ok(orders);
         }
@@ -32,7 +32,7 @@ namespace App.Microservices.Orders.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var order = await _db.Orders.FirstOrDefaultAsync(x=>x.OrderId.ToString() ==id);
+            var order = await _dbContext.Orders.FirstOrDefaultAsync(x=>x.OrderId.ToString() ==id);
 
             return Ok(order);
         }
@@ -41,9 +41,9 @@ namespace App.Microservices.Orders.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Order newOrder)
         {
-            _db.Orders.Add(newOrder);
-            await _db.SaveChangesAsync();
-            return CreatedAtAction("Get", new { id = newOrder.Id }, newOrder);
+            _dbContext.Orders.Add(newOrder);
+            await _dbContext.SaveChangesAsync();
+            return CreatedAtAction("Get", new { id = newOrder.OrderId }, newOrder);
         }
 
         // PUT api/<OrdersController>/5

@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+src/App.WebHosts/vue_cli_app/
+src/App.WebHosts/vue_vite_app/

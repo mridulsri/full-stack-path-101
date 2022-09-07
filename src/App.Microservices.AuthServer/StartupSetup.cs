@@ -20,7 +20,10 @@ public static class StartupSetup
 
         if (string.IsNullOrWhiteSpace(sqlConnString))
         {
-            string sqliteConnString = configuration.GetConnectionString("sqlite");
+            string sqliteConnString = "DataSource=auth.db";
+#if DEBUG
+            sqliteConnString = configuration.GetConnectionString("sqlite");
+#endif
             services.AddDbContext<AuthDbContext>(options =>
                 options.UseSqlite(sqliteConnString,
                     b => b.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName)

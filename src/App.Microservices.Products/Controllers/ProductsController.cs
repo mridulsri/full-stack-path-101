@@ -6,6 +6,8 @@ using App.Microservices.Products.Models.Requests;
 using App.Microservices.Products.Persistence;
 using App.Microservices.Products.Models.Entites;
 using Microsoft.AspNetCore.Authorization;
+using MassTransit;
+using Application.Models.RabbitMqModel;
 
 namespace App.Microservices.Products.Controllers
 {
@@ -15,9 +17,11 @@ namespace App.Microservices.Products.Controllers
     public class ProductsController : ControllerBase
     {
         public readonly ProductDbContext _dbContext;
-        public ProductsController(ProductDbContext dbContext)
+        private readonly IPublishEndpoint _publishEndpoint;
+        public ProductsController(ProductDbContext dbContext, IPublishEndpoint publishEndpoint)
         {
             _dbContext = dbContext;
+            _publishEndpoint = publishEndpoint;
         }
         [HttpGet("get")]
         public async Task<IActionResult> Get()
@@ -46,9 +50,20 @@ namespace App.Microservices.Products.Controllers
             };
 
             await _dbContext.Products.AddAsync(newEntity);
-
-
             var id = await  _dbContext.SaveChangesAsync();
+
+            try
+            {
+                await _publishEndpoint.Publish<ProductCreated>(new ProductCreated
+                {
+                    Id = newEntity.Id,
+                    Name = newEntity.Name
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             if (id <=0)
                 return BadRequest(new ErrorResponse("Something went wrong"));

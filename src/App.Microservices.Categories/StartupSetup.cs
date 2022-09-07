@@ -11,7 +11,10 @@ public static class StartupSetup
 
         if (string.IsNullOrWhiteSpace(sqlConnString))
         {
-            string sqliteConnString = configuration.GetConnectionString("sqlite");
+            string sqliteConnString = "DataSource=categories.db";
+#if DEBUG
+            sqliteConnString = configuration.GetConnectionString("sqlite");
+#endif
             services.AddDbContext<CategoryDbContext>(options =>
                 options.UseSqlite(sqliteConnString,
                     b => b.MigrationsAssembly(typeof(CategoryDbContext).Assembly.FullName)

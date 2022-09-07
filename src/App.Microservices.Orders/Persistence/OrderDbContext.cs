@@ -17,5 +17,6 @@ namespace App.Microservices.Orders.Persistence
         }
 
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

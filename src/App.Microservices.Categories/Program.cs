@@ -1,7 +1,10 @@
+using App.Infrastructure.Logging;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var configuration = builder.Configuration;
+builder.Host.UseAppLogger(configuration);
 builder.Services.AddServiceFramework(configuration);
 builder.Services.AddDataStore(configuration);
 
@@ -14,6 +17,7 @@ var app = builder.Build();
 app.UseServiceFramework();
 app.UseDataStore();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

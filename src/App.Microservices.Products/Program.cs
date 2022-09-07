@@ -1,3 +1,4 @@
+using App.Infrastructure.Logging;
 using App.Microservices.Framework.ConfigOptions;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var configuration = builder.Configuration;
+builder.Host.UseAppLogger(configuration);
 
 builder.Services.AddServiceFramework(configuration);
 builder.Services.AddDataStore(configuration);

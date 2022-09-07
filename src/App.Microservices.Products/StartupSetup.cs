@@ -2,6 +2,7 @@
 using App.Microservices.Products.Persistence;
 using MediatR;
 using System.Reflection;
+using MassTransit;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +14,10 @@ public static class StartupSetup
 
         if (string.IsNullOrWhiteSpace(sqlConnString))
         {
-            string sqliteConnString = configuration.GetConnectionString("sqlite");
+            string sqliteConnString = "DataSource=products.db";
+#if DEBUG
+            sqliteConnString = configuration.GetConnectionString("sqlite");
+#endif
             services.AddDbContext<ProductDbContext>(options =>
                 options.UseSqlite(sqliteConnString,
                     b => b.MigrationsAssembly(typeof(ProductDbContext).Assembly.FullName)
@@ -34,8 +38,6 @@ public static class StartupSetup
         }
         return services;
     }
-
-
     public static IApplicationBuilder UseDataStore(this IApplicationBuilder app)
     {
         using (var serviceScope = app.ApplicationServices.CreateScope())
@@ -60,10 +62,20 @@ public static class StartupSetup
 
         return app;
     }
-
     public static IServiceCollection AddProductModules(this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
+
+        services.AddMassTransit(options => {
+            options.UsingRabbitMq((context, cfg) => {
+                cfg.Host(new Uri("rabbitmq://localhost:4001"), host => {
+                    host.Username("guest");
+                    host.Password("guest");
+                });
+
+            });
+        });
+
         return services;
     }
 }

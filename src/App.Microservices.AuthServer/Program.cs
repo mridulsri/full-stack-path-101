@@ -1,15 +1,12 @@
 using App.Microservices.AuthServer.Configs;
-using App.Microservices.AuthServer.Services;
 using FluentValidation.AspNetCore;
+using App.Infrastructure.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var configuration = builder.Configuration;
-
-var appSettings = new AppSettings();
-configuration.Bind(appSettings);
-builder.Services.AddSingleton(appSettings);
+builder.Host.UseAppLogger(configuration);
 
 builder.Services.AddServiceFramework(configuration);
 builder.Services.AddDataStore(configuration);
@@ -31,6 +28,7 @@ app.UseDataStore();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

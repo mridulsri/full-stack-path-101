@@ -78,6 +78,9 @@
 
 # Day-4
 	- Log Serilog
+		- [serilog] (https://serilog.net/)
+		- [serilog best practices](https://benfoster.io/blog/serilog-best-practices)
+		- [Serilog 16 Best Practices and Tips](https://stackify.com/serilog-tutorial-net-logging/)
 	- Middleware
 
 # Day-5
@@ -87,10 +90,15 @@
 	- Basic athentication
 
 # Day-6 
+	- Authentication
+		- https://www.tektutorialshub.com/asp-net-core/authentication-in-asp-net-core/
+		- https://www.tektutorialshub.com/asp-net-core/policy-based-authorization-in-asp-net-core/#:~:text=Authorization%20Policy,-Authorization%20Policies%20are&text=A%20Policy%20defines%20a%20collection,ConfigureServices%20of%20the%20startup%20class.
 	- JWT authentication
+		- https://jasonwatmore.com/post/2022/01/19/net-6-create-and-validate-jwt-tokens-use-custom-jwt-middleware
 	
 # Day-7
 	- Refresh token
+		- 
 	- JWKS (JSON web key set)
 		- help not to implement the token verification in all the microservices.
 	- certificate security implement
@@ -101,13 +109,17 @@
 		- https://www.stevejgordon.co.uk/httpclientfactory-asp-net-core-logging
 		- https://www.infoq.com/articles/creating-http-sdks-dotnet-6/
 		- pckg: poliy,polly.Extentions
+			- https://www.pluralsight.com/blog/software-development/intro-to-polly
 		- circuit breaker 
 			- https://www.codeguru.com/network/circuit-breaker-polly/
+			- https://www.pluralsight.com/blog/software-development/intro-to-polly
+			- https://csharpdoc.hotexamples.com/class/Polly/CircuitBreakerSyntaxAsync
+			- https://andrewlock.net/when-you-use-the-polly-circuit-breaker-make-sure-you-share-your-policy-instances-2/
 	
 	- Grpc Services
 		- https://grpc.io/docs/languages/csharp/quickstart/
 		- https://medium.com/geekculture/build-high-performant-microservices-using-grpc-and-net-6-adde158c5ac
-	
+		- https://grpc.io/docs/languages/csharp/quickstart/
 	- Refit
 		- https://reactiveui.github.io/refit/
 
@@ -122,6 +134,15 @@
 	- Benchmarking
 		- pckg: BenchmarkDotNet
 		
+
+# Day-11 (6-Sept-2022)
+	- Benchmarking
+		- Logic
+	- Azure Services
+		- API Management Service (apim-)
+		- Web app (app-)
+		- Resource Group (rg-)
+		- Azure SQL database (sqldb-)
 
 
 # Misslanious
@@ -143,4 +164,4 @@
 	
 	## Model Validation
 		- https://docs.fluentvalidation.net/en/latest/async.html
-webdevdl.ir
+

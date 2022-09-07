@@ -47,14 +47,14 @@ public static class StartupSetup
         #endregion
 
         #region Jwt-Authentication
-        services.AddAuthProcess(configuration);
+        services.AddAuthConfiguration(configuration);
         #endregion
 
         #region Swagger api-docs
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerApiDocs(versionId:"v1", title: "Developer API docs");
+        services.AddSwaggerApiDocs(versionId: "v1", title: "Developer API docs");
 
         #endregion
 
@@ -68,17 +68,27 @@ public static class StartupSetup
     public static IApplicationBuilder UseServiceFramework(this IApplicationBuilder app)
     {
         app.UseSwaggerApiDocs();
+        // return static content
+        app.Run(async (context) =>
+        {
+            if (context.Request.Path.ToUriComponent().Contains("api") == false)
+            {
+                var parantDirInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+                var indexFile = Path.Combine(parantDirInfo.Parent.FullName, "App.WebHosts", "wwwroot", "index.html");
+                await context.Response.SendFileAsync(indexFile);
+            }
+        });
         return app;
-
     }
 
-    public static IServiceCollection AddAuthProcess(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddAuthConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         AuthenticationOption authenticationOption = new AuthenticationOption();
         configuration.Bind(AuthenticationOption.Authentication, authenticationOption);
         services.AddSingleton(authenticationOption);
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(cfg => {
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(cfg =>
+        {
             cfg.TokenValidationParameters = new TokenValidationParameters()
             {
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationOption.AccessTokenSecret)),
@@ -93,6 +103,4 @@ public static class StartupSetup
 
         return services;
     }
-
-    
 }

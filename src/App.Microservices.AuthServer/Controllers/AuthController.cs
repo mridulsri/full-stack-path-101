@@ -34,6 +34,7 @@ public class AuthController : ApiControllerBase
 
     private readonly AuthDbContext _dbContext;
     private readonly IPasswordHasher _hasher;
+    private readonly ILogger _logger;
 
     public AuthController(Authenticator authenticator,
         RefreshTokenValidator refreshTokenValidator,
@@ -41,7 +42,8 @@ public class AuthController : ApiControllerBase
         AppSettings appSettings,
         IHttpContextAccessor httpContextAccessor,
         AuthDbContext dbContext,
-        IPasswordHasher hasher
+        IPasswordHasher hasher,
+        ILogger<AuthController> logger
         )
     {
         _authenticator = authenticator;
@@ -59,6 +61,7 @@ public class AuthController : ApiControllerBase
     {
         // Tried CQRS pattern using Mediator
         //  var user = await Mediator.Send(loginCommand);
+        _logger.LogInformation("logging the data");
         var user = _dbContext.Users.FirstOrDefault(x => x.Username.Equals(loginCommand.UserName.Trim()));
         if (user == null)
         {
