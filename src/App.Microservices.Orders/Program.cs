@@ -1,8 +1,10 @@
+using App.Microservices.Orders.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSqlDataBaseProvider(builder.Configuration);
+builder.Services.AddDataStore<OrderDbContext>(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,7 +20,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseSqlDataBaseProvider();
+app.UseDataStoreMigration<OrderDbContext>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

@@ -82,6 +82,7 @@
 		- [serilog best practices](https://benfoster.io/blog/serilog-best-practices)
 		- [Serilog 16 Best Practices and Tips](https://stackify.com/serilog-tutorial-net-logging/)
 	- Middleware
+		- https://andrewlock.net/understanding-your-middleware-pipeline-in-dotnet-6-with-the-middleware-analysis-package/
 
 # Day-5
 	- ProblemDetails class

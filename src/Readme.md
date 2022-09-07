@@ -4,6 +4,7 @@
 
 ### EF command
 	- Add-Migration -o ./Persistence/Migrations/ <Name>
+	- Add-Migration -o ./Persistence/Migrations/ --provider Sqlite
 		- create migration
 	
 ```

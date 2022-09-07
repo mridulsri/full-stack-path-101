@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using App.Microservices.Framework.Jwt;
 using Hellang.Middleware.ProblemDetails;
 using App.Microservices.Framework.Exceptions;
-using Microsoft.AspNetCore.Authorization;
 using MediatR;
 using System.Reflection;
 using FluentValidation;
@@ -11,6 +9,7 @@ using App.Microservices.Framework.Services;
 using App.Microservices.Framework.ConfigOptions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -69,15 +68,19 @@ public static class StartupSetup
     {
         app.UseSwaggerApiDocs();
         // return static content
-        app.Run(async (context) =>
+        /*
+        app.Use(async (context, next) =>
         {
-            if (context.Request.Path.ToUriComponent().Contains("api") == false)
+            if (!context.Request.Path.Value.Contains("api"))
             {
                 var parantDirInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
                 var indexFile = Path.Combine(parantDirInfo.Parent.FullName, "App.WebHosts", "wwwroot", "index.html");
                 await context.Response.SendFileAsync(indexFile);
             }
+            else
+                await next.Invoke();
         });
+        */
         return app;
     }
 
@@ -102,5 +105,67 @@ public static class StartupSetup
         });
 
         return services;
+    }
+
+
+    public static IServiceCollection AddDataStore<TDbContext>(this IServiceCollection services, IConfiguration configuration) where TDbContext : DbContext
+    {
+        var provider = configuration.GetValue("Provider", "sqlite");
+        services.AddDbContextPool<TDbContext>(options =>
+        {
+            switch (provider)
+            {
+                case "SqlServer":
+                    {
+                        string sqlConnString = Environment.GetEnvironmentVariable("ASPNETCORE_SQLSERVER") ?? configuration.GetConnectionString("SqlServer");
+                        options.UseSqlServer(sqlConnString, sql =>
+                        {
+                            sql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                            sql.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
+                        });
+                        break;
+                    }
+                default:
+                    {
+                        string sqliteConnString = "DataSource=app.db";
+#if DEBUG
+                        sqliteConnString = configuration.GetConnectionString("sqlite");
+#endif
+                        options.UseSqlite(sqliteConnString, sql =>
+                        {
+                            sql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                            sql.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
+                        });
+                        break;
+                    }
+            }
+        }, poolSize: 2000).AddTransient<TDbContext>();
+
+        return services;
+    }
+
+    public static IApplicationBuilder UseDataStoreMigration<TDbContext>(this IApplicationBuilder app) where TDbContext : DbContext
+    {
+        using (var serviceScope = app.ApplicationServices.CreateScope())
+        {
+            try
+            {
+                using (var context = serviceScope.ServiceProvider.GetRequiredService<TDbContext>())
+                {
+                    if (context.Database.IsSqlite() || context.Database.IsSqlServer())
+                    {
+                        Console.WriteLine("migrating database ...");
+                        context.Database.Migrate();
+                        Console.WriteLine("migrating database ... DONE");
+                    }
+
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        return app;
     }
 }

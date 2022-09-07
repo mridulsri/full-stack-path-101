@@ -1,6 +1,6 @@
-using App.Microservices.AuthServer.Configs;
 using FluentValidation.AspNetCore;
 using App.Infrastructure.Logging;
+using App.Microservices.AuthServer.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +9,11 @@ var configuration = builder.Configuration;
 builder.Host.UseAppLogger(configuration);
 
 builder.Services.AddServiceFramework(configuration);
-builder.Services.AddDataStore(configuration);
+builder.Services.AddDataStore<AuthDbContext>(configuration);
 
 builder.Services.AddAuthModules(configuration);
 
-builder.Services.AddControllers().AddFluentValidation(x => x.AutomaticValidationEnabled = false); 
+builder.Services.AddControllers().AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
 var app = builder.Build();
 
@@ -22,9 +22,8 @@ if (app.Environment.IsDevelopment())
 {
    
 }
-
 app.UseServiceFramework();
-app.UseDataStore();
+app.UseDataStoreMigration<AuthDbContext>();
 
 app.UseHttpsRedirection();
 

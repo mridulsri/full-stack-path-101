@@ -23,14 +23,13 @@ namespace App.Microservices.AuthServer.Controllers;
 
 [Route("api/[controller]")]
 // [ApiController]
-public class AuthController : ApiControllerBase
+public class AuthController : ControllerBase
 {
     private readonly Authenticator _authenticator;
     private readonly IRefreshTokenRepository _refreshTokenRepository;
     private readonly RefreshTokenValidator _refreshTokenValidator;
 
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly AppSettings _appSettings;
 
     private readonly AuthDbContext _dbContext;
     private readonly IPasswordHasher _hasher;
@@ -39,7 +38,6 @@ public class AuthController : ApiControllerBase
     public AuthController(Authenticator authenticator,
         RefreshTokenValidator refreshTokenValidator,
         IRefreshTokenRepository refreshTokenRepository,
-        AppSettings appSettings,
         IHttpContextAccessor httpContextAccessor,
         AuthDbContext dbContext,
         IPasswordHasher hasher,
@@ -50,14 +48,14 @@ public class AuthController : ApiControllerBase
         _refreshTokenRepository = refreshTokenRepository;
         _refreshTokenValidator = refreshTokenValidator;
         _httpContextAccessor = httpContextAccessor;
-        _appSettings = appSettings;
         _dbContext = dbContext;
         _hasher = hasher;
+        _logger = logger;
     }
 
 
-    [HttpPost("auth")]
-    public async Task<IActionResult> Login(LoginCommand loginCommand)
+    [HttpPost]
+    public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
     {
         // Tried CQRS pattern using Mediator
         //  var user = await Mediator.Send(loginCommand);
