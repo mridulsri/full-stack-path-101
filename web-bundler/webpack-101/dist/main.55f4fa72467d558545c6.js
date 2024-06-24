@@ -1,0 +1,2 @@
+(()=>{"use strict";var e=document.createElement("p");e.textContent="Hello from webpack!",document.body.appendChild(e);var t=document.createElement("p"),n=[].concat([1,2,3,4,5,6],[7,8,9,10]);t.textContent=n.join(" "),document.body.appendChild(t)})();
+//# sourceMappingURL=main.55f4fa72467d558545c6.js.map
