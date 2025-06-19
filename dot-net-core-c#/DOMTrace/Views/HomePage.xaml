@@ -1,0 +1,23 @@
+﻿<Page x:Class="DOMTrace.Views.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:DOMTrace.Views"
+      mc:Ignorable="d"
+      Title="HomePage" Height="450" Width="800">
+    <Grid>
+        <Border Background="White" Padding="30" CornerRadius="8" materialDesign:ElevationAssist.Elevation="Dp2"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="🏠 Home Page" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center"
+                           Margin="0 0 0 20" />
+                <TextBlock Text="You have successfully logged in!"
+                           FontSize="16" Foreground="{StaticResource TextBrush}" />
+                <Button Content="Log Out" Name="LogoutButton" Style="{StaticResource FlatAccentButton}" Margin="0 20 0 0"
+                        Click="LogoutButton_OnClick" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
