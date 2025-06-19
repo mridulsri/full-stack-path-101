@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.available-items {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.drop-zones {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.drop-zone {
+    width: 500px;
+    height: 500px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    position: relative;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: 
+        repeating-linear-gradient(#ddd 0 1px, transparent 1px 80px),
+        repeating-linear-gradient(90deg, #ddd 0 1px, transparent 1px 80px);
+}
+
+.draggable {
+    background: white;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    position: relative;
+    cursor: move;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    overflow: hidden;
+    padding: 4px;
+}
+
+.draggable img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.draggable:hover {
+    transform: scale(1.02);
+}
+
+.dragging {
+    opacity: 0.7;
+    z-index: 1000;
+}
+
+.drop-zone.drop-hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.drop-zone.ui-droppable-active {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.drop-zone.ui-droppable-hover {
+    background-color: #e9ecef;
+    border-color: #0056b3;
+}
+
+.size-label {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+#conflictDialog {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dialog-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.dialog-buttons button:hover {
+    background: #0056b3;
+}
+
+#cancelButton {
+    background: #6c757d;
+}
+
+#cancelButton:hover {
+    background: #545b62;
+}

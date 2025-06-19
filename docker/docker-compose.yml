@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  postgres:
+    container_name: postgres-container
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PW}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../pgdata:/var/lib/postgresql/data
+      - ../src/ConfiguratorWebUI/data-migrations:/data-migrations
+    restart: always
+    #command: bash /data-migrations/initdb.sh
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
+    ports:
+      - "5050:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always

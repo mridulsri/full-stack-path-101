@@ -1,0 +1,22 @@
+{
+  "name": "vite_vue3_app_101",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite dev -- --tenant=Demo",
+    "dev": "vite -- --tenant=Demo",
+    "build": "vite build -- --tenant=Demo",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pathe": "^1.1.2",
+    "unplugin": "^1.10.1",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "glob": "^10.3.15",
+    "vite": "^5.2.0"
+  }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Drag and Drop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="workspace">
+            <h2>Available Images</h2>
+            <div id="available-items" class="item-container drop-zone">
+                <!-- 1x1 Images -->
+                <div class="draggable" draggable="true" data-type="image" data-width="1" data-height="1">
+                    <img src="https://placehold.co/80x80/4CAF50/white?text=1x1" alt="Small Image 1">
+                    <span class="size-label">1x1</span>
+                </div>
+                <div class="draggable" draggable="true" data-type="image" data-width="1" data-height="1">
+                    <img src="https://placehold.co/80x80/2196F3/white?text=1x1" alt="Small Image 2">
+                    <span class="size-label">1x1</span>
+                </div>
+
+                <!-- 2x1 Images -->
+                <div class="draggable" draggable="true" data-type="image" data-width="2" data-height="1">
+                    <img src="https://placehold.co/160x80/9C27B0/white?text=2x1" alt="Wide Image 1">
+                    <span class="size-label">2x1</span>
+                </div>
+                <div class="draggable" draggable="true" data-type="image" data-width="2" data-height="1">
+                    <img src="https://placehold.co/160x80/FF9800/white?text=2x1" alt="Wide Image 2">
+                    <span class="size-label">2x1</span>
+                </div>
+
+                <!-- 1x2 Images -->
+                <div class="draggable" draggable="true" data-type="image" data-width="1" data-height="2">
+                    <img src="https://placehold.co/80x160/F44336/white?text=1x2" alt="Tall Image 1">
+                    <span class="size-label">1x2</span>
+                </div>
+                <div class="draggable" draggable="true" data-type="image" data-width="1" data-height="2">
+                    <img src="https://placehold.co/80x160/009688/white?text=1x2" alt="Tall Image 2">
+                    <span class="size-label">1x2</span>
+                </div>
+
+                <!-- 2x2 Images -->
+                <div class="draggable" draggable="true" data-type="image" data-width="2" data-height="2">
+                    <img src="https://placehold.co/160x160/795548/white?text=2x2" alt="Large Image 1">
+                    <span class="size-label">2x2</span>
+                </div>
+                <div class="draggable" draggable="true" data-type="image" data-width="2" data-height="2">
+                    <img src="https://placehold.co/160x160/607D8B/white?text=2x2" alt="Large Image 2">
+                    <span class="size-label">2x2</span>
+                </div>
+
+                <!-- 3x2 Images -->
+                <div class="draggable" draggable="true" data-type="image" data-width="3" data-height="2">
+                    <img src="https://placehold.co/240x160/E91E63/white?text=3x2" alt="Panorama 1">
+                    <span class="size-label">3x2</span>
+                </div>
+                <div class="draggable" draggable="true" data-type="image" data-width="3" data-height="2">
+                    <img src="https://placehold.co/240x160/673AB7/white?text=3x2" alt="Panorama 2">
+                    <span class="size-label">3x2</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="workspace">
+            <h2>Gallery 1</h2>
+            <div id="drop-zone-1" class="drop-zone" data-cols="6" data-rows="6">
+                <div class="grid-overlay"></div>
+            </div>
+        </div>
+        
+        <div class="workspace">
+            <h2>Gallery 2</h2>
+            <div id="drop-zone-2" class="drop-zone" data-cols="6" data-rows="6">
+                <div class="grid-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-zone" class="remove-zone">
+        <div class="remove-icon">🗑️</div>
+        <span>Drop here to remove</span>
+    </div>
+
+    <div id="conflict-modal" class="modal">
+        <div class="modal-content">
+            <h3>Conflict Detected</h3>
+            <p id="conflict-message"></p>
+            <div class="modal-actions">
+                <button id="resolve-replace">Replace</button>
+                <button id="resolve-keep">Keep Both</button>
+                <button id="resolve-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dragdrop.js"></script>
+    <script>
+        // Initialize the drag and drop manager when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.dragDropManager = new DragDropManager();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+FROM python:3
+
+WORKDIR /usr/src/app
+COPY dev-requirement.txt ./
+
+RUN pip install --no-cache-dir --upgrade -r ./dev-requirement.txt.txt
+
+CMD ["python", "./src/server.py"]

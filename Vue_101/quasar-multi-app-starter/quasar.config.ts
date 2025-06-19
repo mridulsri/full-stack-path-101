@@ -1,14 +1,9 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers';
-import { fileURLToPath } from 'node:url';
-import { resolve } from 'path';
-import { createHtmlPlugin } from 'vite-plugin-html';
-//import mkcert from 'vite-plugin-mkcert';
+import { defineConfig } from '#q-app/wrappers'
 
-export default defineConfig((ctx) => {
-  debugger
+export default defineConfig((/* ctx */) => {
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -17,7 +12,6 @@ export default defineConfig((ctx) => {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-      'i18n',
       'axios'
     ],
 
@@ -54,12 +48,6 @@ export default defineConfig((ctx) => {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-      // rollupOptions: {
-      //   input: {
-      //     admin: resolve(__dirname, 'src/apps/admin/index.html'),
-      //     client: resolve(__dirname, 'src/apps/client/index.html')
-      //   }
-      // },
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -79,63 +67,20 @@ export default defineConfig((ctx) => {
       // viteVuePluginOptions: {},
 
       vitePlugins: [
-        //mkcert(), // optional for local HTTPS
-        ['vite-plugin-pages', {}],
-        // createHtmlPlugin({
-        //   minify: false,
-        //   pages: [
-        //     {
-        //       entry: 'src/apps/admin/main.ts',
-        //       template: 'src/apps/admin/index.html',
-        //       filename: 'src/apps/admin/index.html'
-        //     },
-        //     {
-        //       entry: 'src/client/main.ts',
-        //       template: 'src/client/index.html',
-        //       filename: 'src//apps/client/index.html'
-        //     }
-        //   ]
-        // }),
-        ['@intlify/unplugin-vue-i18n/vite', {
-          // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
-          // compositionOnly: false,
-
-          // if you want to use named tokens in your Vue I18n messages, such as 'Hello {name}',
-          // you need to set `runtimeOnly: false`
-          // runtimeOnly: false,
-
-          ssr: ctx.modeName === 'ssr',
-
-          // you need to set i18n resource including paths !
-          include: [fileURLToPath(new URL('./src/i18n', import.meta.url))]
-        }],
-
         ['vite-plugin-checker', {
           vueTsc: true,
           eslint: {
             lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{ts,js,mjs,cjs,vue}"',
             useFlatConfig: true
           }
-        }, { server: false }],
-
+        }, { server: false }]
       ]
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
       // https: true,
-      port: 9090,
-      open: true, // opens browser window automatically
-      // proxy: {
-      //   '/admin': {
-      //     target: 'http://localhost:9090',
-      //     rewrite: (path) => path.replace(/^\/admin/, '/apps/admin'),
-      //   },
-      //   '/client': {
-      //     target: 'http://localhost:9090',
-      //     rewrite: (path) => path.replace(/^\/client/, '/apps/client'),
-      //   },
-      // },
+      open: true // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
@@ -251,7 +196,7 @@ export default defineConfig((ctx) => {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar-vite-101'
+        appId: 'quasar-multi-app-starter'
       }
     },
 

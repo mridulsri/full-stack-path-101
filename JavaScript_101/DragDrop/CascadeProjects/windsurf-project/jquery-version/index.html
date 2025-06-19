@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Grid - jQuery Version</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="container">
+        <div class="available-items" id="availableItems">
+            <h2>Available Items</h2>
+        </div>
+        <div class="drop-zones">
+            <div class="drop-zone" id="dropZone1">
+                <div class="grid-overlay"></div>
+            </div>
+            <div class="drop-zone" id="dropZone2">
+                <div class="grid-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialog for conflict resolution -->
+    <div id="conflictDialog" title="Item Conflict">
+        <p id="conflictMessage"></p>
+    </div>
+
+    <script src="dragdrop.js"></script>
+</body>
+</html>
