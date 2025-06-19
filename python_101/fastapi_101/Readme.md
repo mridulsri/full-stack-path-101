@@ -5,8 +5,9 @@
 
 ### setup
 - python -m venv env
-- .\env\Scripts\activate
+- .\venv\Scripts\activate
 - pip install -r .\requirements.txt
+- pip freeze > requirements.txt  [add packages in the file]
 
 ### run
 - uvicorn main:app   // (<main.py>>:<FastAPI()>)
