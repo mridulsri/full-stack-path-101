@@ -6,39 +6,36 @@ namespace DOMTrace.UserControls;
 public partial class LoginControl : UserControl
 {
     public event EventHandler? LoginSuccess;
-    
+
     public LoginControl()
     {
         InitializeComponent();
-        
+
         // Load saved credentials
-        /*
-        UsernameTextBox.Text = Properties.Settings.Default.SavedUsername;
-        RememberMeCheckBox.IsChecked = Properties.Settings.Default.RememberMe;
-        */
+        UsernameTextBox.Text = Settings.Default.SavedUsername;
+        RememberMeCheckBox.IsChecked = Settings.Default.RememberMe;
     }
-    
+
     private void LoginButton_OnClick(object sender, RoutedEventArgs e)
     {
         string username = UsernameTextBox.Text;
         string password = PasswordBox.Password;
 
-        if (username == "admin" && password == "Password@123")
+        if (username == "admin" && password == "admin")
         {
-            /* Need to implement using Visual studio
             if (RememberMeCheckBox.IsChecked == true)
             {
-                Properties.Settings.Default.SavedUsername = username;
-                Properties.Settings.Default.RememberMe = true;
+                Settings.Default.SavedUsername = username;
+                Settings.Default.RememberMe = true;
             }
             else
             {
-                Properties.Settings.Default.SavedUsername = string.Empty;
-                Properties.Settings.Default.RememberMe = false;
+                Settings.Default.SavedUsername = string.Empty;
+                Settings.Default.RememberMe = false;
             }
-            
-            Properties.Settings.Default.Save();
-            */
+
+            Settings.Default.Save(); // Save settings
+
             LoginSuccess?.Invoke(this, EventArgs.Empty);
         }
         else

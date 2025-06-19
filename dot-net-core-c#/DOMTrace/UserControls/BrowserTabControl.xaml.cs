@@ -1,11 +1,9 @@
-﻿using System.IO;
+﻿using CefSharp;
+using DOMTrace.HelperUtlis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using CefSharp;
-using CefSharp.Wpf;
-using DOMTrace.HelperUtlis;
 
 namespace DOMTrace.UserControls;
 
@@ -14,19 +12,19 @@ public partial class BrowserTabControl : UserControl
     public BrowserTabControl()
     {
         InitializeComponent();
-        
+
         // Register JS bridge (already done earlier)
         Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
         Browser.JavascriptObjectRepository.Register("bound", new JsBridge(this), options: BindingOptions.DefaultBinder);
         Browser.FrameLoadEnd += Browser_FrameLoadEnd;
-        
+
         // Update Address bar
         Browser.AddressChanged += (s, args) =>
         {
-            if(args.NewValue == null) return;
+            if (args.NewValue == null) return;
             Dispatcher.Invoke(() => AddressBar.Text = args.NewValue.ToString() ?? string.Empty);
         };
-        
+
         // Update buttons when navigation state changes
         Browser.LoadingStateChanged += (s, e) =>
         {
@@ -34,11 +32,11 @@ public partial class BrowserTabControl : UserControl
             {
                 BackButton.IsEnabled = e.CanGoBack;
                 ForwardButton.IsEnabled = e.CanGoForward;
-                
+
                 LoadingProgressBar.Visibility = e.IsLoading ? Visibility.Visible : Visibility.Collapsed;
             });
         };
-        
+
         // set shortcuts
         this.PreviewKeyDown += BrowserTabControl_PreviewKeyDown;
     }
@@ -74,17 +72,16 @@ public partial class BrowserTabControl : UserControl
         if (!e.Frame.IsMain) return;
         string script = ResourceHelper.ReadEmbeddedScript("DOMTrace.Scripts.highlight-tracker.js");
         e.Frame.ExecuteJavaScriptAsync(script);
-        
+
         // Load Favicon
         if (e.Frame.IsMain)
         {
-            var uri = new Uri(Browser.Address);
-            var faviconUrl = $"{uri.Scheme}://{uri.Host}/favicon.ico";
-
             await Dispatcher.InvokeAsync(() =>
             {
                 try
                 {
+                    var uri = new Uri(Browser.Address);
+                    var faviconUrl = $"{uri.Scheme}://{uri.Host}/favicon.ico";
                     Favicon.Source = new BitmapImage(new Uri(faviconUrl));
                 }
                 catch
@@ -93,9 +90,9 @@ public partial class BrowserTabControl : UserControl
                 }
             });
         }
-        
+
     }
-    
+
     public void DisplayXPath(string xpath)
     {
         Dispatcher.Invoke(() =>
@@ -103,7 +100,7 @@ public partial class BrowserTabControl : UserControl
             XPathOutput.Text = xpath;
         });
     }
-    
+
     private void BrowserTabControl_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (Keyboard.Modifiers == ModifierKeys.Alt)
@@ -130,8 +127,8 @@ public partial class BrowserTabControl : UserControl
             e.Handled = true;
         }
     }
-    
-    
+
+
 }
 
 
