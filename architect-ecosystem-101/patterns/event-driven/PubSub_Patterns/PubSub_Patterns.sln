@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBroker", "MessageBroker\MessageBroker.csproj", "{A2479850-D305-48A1-AB7A-59B579D3EEE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSub_Web_App", "PubSub_Web_App\PubSub_Web_App.csproj", "{A72A2554-15C7-413C-87F8-1DA9CF206946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageActors", "MessageActors\MessageActors.csproj", "{0AF4191C-4F1C-43DB-A623-0E81AC6F90D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2479850-D305-48A1-AB7A-59B579D3EEE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2479850-D305-48A1-AB7A-59B579D3EEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2479850-D305-48A1-AB7A-59B579D3EEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2479850-D305-48A1-AB7A-59B579D3EEE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A72A2554-15C7-413C-87F8-1DA9CF206946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72A2554-15C7-413C-87F8-1DA9CF206946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72A2554-15C7-413C-87F8-1DA9CF206946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72A2554-15C7-413C-87F8-1DA9CF206946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF4191C-4F1C-43DB-A623-0E81AC6F90D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF4191C-4F1C-43DB-A623-0E81AC6F90D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF4191C-4F1C-43DB-A623-0E81AC6F90D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF4191C-4F1C-43DB-A623-0E81AC6F90D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
