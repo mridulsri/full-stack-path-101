@@ -7,9 +7,12 @@ public partial class LoginControl : UserControl
 {
     public event EventHandler? LoginSuccess;
 
+
     public LoginControl()
     {
         InitializeComponent();
+
+
 
         // Load saved credentials
         UsernameTextBox.Text = Settings.Default.SavedUsername;

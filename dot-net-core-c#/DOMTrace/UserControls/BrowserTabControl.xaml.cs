@@ -39,6 +39,9 @@ public partial class BrowserTabControl : UserControl
 
         // set shortcuts
         this.PreviewKeyDown += BrowserTabControl_PreviewKeyDown;
+
+        // set data context
+        DataContext = new BrowserControlViewModel();
     }
     private void DevTools_Click(object sender, RoutedEventArgs e)
     {
@@ -97,7 +100,8 @@ public partial class BrowserTabControl : UserControl
     {
         Dispatcher.Invoke(() =>
         {
-            XPathOutput.Text = xpath;
+            //XPathOutput.Text = xpath;
+            Console.WriteLine(xpath);
         });
     }
 

@@ -13,6 +13,7 @@
       <PackageReference Include="CefSharp.Wpf.NETCore" Version="137.0.100" />
       <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
       <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+      <PackageReference Include="MySql.Data" Version="9.3.0" />
     </ItemGroup>
 
     <ItemGroup>

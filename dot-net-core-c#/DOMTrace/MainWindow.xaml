@@ -3,16 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:usercontrol="clr-namespace:DOMTrace.UserControls"
         xmlns:views="clr-namespace:DOMTrace.Views"
         xmlns:local="clr-namespace:DOMTrace"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" 
-        WindowStartupLocation="CenterScreen">
+        Title="MainWindow" 
+        Height="450" 
+        Width="800" 
+        WindowStartupLocation="CenterScreen"  
+        Style="{StaticResource MaterialDesignWindow}">
     <Grid>
         <!-- Login View -->
         <usercontrol:LoginControl x:Name="LoginView" Visibility="Visible" LoginSuccess="LoginView_OnLoginSuccess"/>
         
+        <!-- Menu control -->
+        <DockPanel>
+            <Menu x:Name="MainMenu" 
+                  DockPanel.Dock="Top" 
+                  Visibility="Collapsed" 
+                  Background="{DynamicResource MaterialDesignPaper}" 
+                  Foreground="{DynamicResource MaterialDesignBody}">
+                <MenuItem Header="_Home"/>
+                <MenuItem Header="_Expert"/>
+                <MenuItem Header="_Logout"/>
+                <MenuItem Header="_Exit" />
+            </Menu>
+        </DockPanel>
+        
+
+
+
+
+        <!-- Tab control -->
         <TabControl x:Name="MainTabs" Visibility="Collapsed" TabStripPlacement="Top">
             <TabItem Header="Home">
                 <StackPanel>

@@ -10,18 +10,19 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        //MainFrame.Navigate(new Views.LoginPage());
     }
 
     private void LoginView_OnLoginSuccess(object? sender, EventArgs e)
     {
         LoginView.Visibility = Visibility.Collapsed;
+        MainMenu.Visibility = Visibility.Visible;
         MainTabs.Visibility = Visibility.Visible;
     }
 
     private void LogoutButton_OnClick(object sender, RoutedEventArgs e)
     {
         MainTabs.Visibility = Visibility.Collapsed;
+        MainMenu.Visibility = Visibility.Collapsed;
         LoginView.Visibility = Visibility.Visible;
 
         // Optionally clear saved credentials on logout
