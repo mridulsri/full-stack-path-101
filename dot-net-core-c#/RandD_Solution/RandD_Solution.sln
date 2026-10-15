@@ -4,6 +4,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonSchemaPoC", "JsonSchema
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concepts_101", "Concepts_101\Concepts_101.csproj", "{4FF9B408-EC54-4D7A-A7A0-2CDD51C4364A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{8073D811-4E68-42F0-995F-05D4AD8BDB2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesignPatterns", "DesignPatterns", "{7DF5F409-BACD-46A6-86E5-1264A71F48F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy", "DesignPatterns\Strategy\Strategy.csproj", "{1AF08F3C-54A3-43D0-9AE1-61A99F0AE5FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisCache", "BuildingBlocks\RedisCache\RedisCache.csproj", "{1A7BF80E-1BB8-4F15-9DB3-6DDFD22057AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +26,17 @@ Global
 		{4FF9B408-EC54-4D7A-A7A0-2CDD51C4364A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF9B408-EC54-4D7A-A7A0-2CDD51C4364A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FF9B408-EC54-4D7A-A7A0-2CDD51C4364A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AF08F3C-54A3-43D0-9AE1-61A99F0AE5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AF08F3C-54A3-43D0-9AE1-61A99F0AE5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AF08F3C-54A3-43D0-9AE1-61A99F0AE5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AF08F3C-54A3-43D0-9AE1-61A99F0AE5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A7BF80E-1BB8-4F15-9DB3-6DDFD22057AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A7BF80E-1BB8-4F15-9DB3-6DDFD22057AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A7BF80E-1BB8-4F15-9DB3-6DDFD22057AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A7BF80E-1BB8-4F15-9DB3-6DDFD22057AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1AF08F3C-54A3-43D0-9AE1-61A99F0AE5FB} = {7DF5F409-BACD-46A6-86E5-1264A71F48F9}
+		{1A7BF80E-1BB8-4F15-9DB3-6DDFD22057AF} = {8073D811-4E68-42F0-995F-05D4AD8BDB2D}
 	EndGlobalSection
 EndGlobal
